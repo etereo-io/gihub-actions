@@ -1,5 +1,5 @@
 name: Build and push to gcr
-author: etereoio
+author: BillinTeam
 description: |-
   Build your app docker image and push it to gcr
 inputs:

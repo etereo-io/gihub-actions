@@ -1,5 +1,5 @@
 name: Destroy specific environment
-author: etereoio
+author: BillinTeam
 description: |-
   Action to destroy a kubernetes environmnet. Useful to recycle dynamic environments.
 inputs:

@@ -1,5 +1,5 @@
 name: Build and push helm chart to chartmuseum
-author: etereoio
+author: BillinTeam
 description: |-
   Package your helm chart and push it to chart museum
 inputs:

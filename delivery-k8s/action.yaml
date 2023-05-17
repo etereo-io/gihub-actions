@@ -1,5 +1,5 @@
 name: Continuous delivery to kubernetes cluster
-author: etereoio
+author: BillinTeam
 description: |-
   Deploy your applications to kubernetes using helm
 inputs:
@@ -182,8 +182,8 @@ runs:
         fi
 
         echo "BRANCH_SHORT "$BRANCH_SHORT
-        echo "namespace=$NAMESPACE" >> "$GITHUB_OUTPUT"
-        echo "branch_sort=$BRANCH_SHORT" >> "$GITHUB_OUTPUT"
+        echo "namespace=$(echo $NAMESPACE)" >> $GITHUB_OUTPUT
+        echo "branch_sort=$(echo $BRANCH_SHORT)" >> $GITHUB_OUTPUT
 
         if [ "${{ inputs.dockerImageTagEnv}}" != "" ]; then
           echo "Export docker image tag as ${{inputs.dockerImageTagEnvName}}=${{inputs.dockerImageTagEnv}}"
