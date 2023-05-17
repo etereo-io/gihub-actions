@@ -183,7 +183,7 @@ runs:
 
         echo "BRANCH_SHORT "$BRANCH_SHORT
         echo "namespace=$(echo $NAMESPACE)" >> $GITHUB_OUTPUT
-        echo "branch_sort=$(echo $BRANCH_SHORT)" >> $GITHUB_OUTPUT
+        echo "branch_short=$(echo $BRANCH_SHORT)" >> $GITHUB_OUTPUT
 
         if [ "${{ inputs.dockerImageTagEnv}}" != "" ]; then
           echo "Export docker image tag as ${{inputs.dockerImageTagEnvName}}=${{inputs.dockerImageTagEnv}}"
