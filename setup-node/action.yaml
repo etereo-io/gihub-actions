@@ -6,7 +6,7 @@ inputs:
   node-version:
     description: 'Node version'
     required: false
-    default: '14.x'
+    default: '16.x'
 
 outputs:
   dependencies-cache-hit:
@@ -21,7 +21,7 @@ runs:
       - name: Use Node
         uses: actions/setup-node@v3
         with:
-          node-version: '14.x'
+          node-version: '16.x'
       - name: Cache node_modules
         uses: actions/cache@v3
         id: dependencies-cache
