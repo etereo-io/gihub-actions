@@ -136,7 +136,7 @@ runs:
       shell: bash
       id: deploy
       run: |-
-        if [ "${{ inputs.deployFromPR }}" != ""]; then
+        if [[ "${{ inputs.deployFromPR }}" != "" ]]; then
           BRANCH_LOWER="$(echo "$GITHUB_HEAD_REF" | tr '[:upper:]' '[:lower:]' | sed 's/_/-/g')"
           BRANCH_TYPE=$BRANCH_LOWER
         else
