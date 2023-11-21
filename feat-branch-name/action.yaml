@@ -24,12 +24,12 @@ outputs:
     description: "The kubernetes namespace where the application is deployed to"
     value: "${{ steps.get-short.outputs.namespace }}"
   branch_short: # id of the output
-    description: "The name of the kubernetes branch (eg: ft-some-name)"
+    description: "The name of the branch (eg: ft-some-name)"
     value: "${{ steps.get-short.outputs.branch_short }}"
 runs:
   using: "composite"
   steps:
-    - name: Syncronize helm releases using helmfile and replacing docker image digest
+    - name: Get feature branch name
       shell: bash
       id: get-short
       run: |-
