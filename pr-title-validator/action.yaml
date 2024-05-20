@@ -1,0 +1,38 @@
+name: PR Title Validator
+author: BillinTeam
+description: |-
+  Action check if PR title follows conventional commits format.
+runs:
+  using: "composite"
+  steps:
+    - name : Print Title of PR
+      run: echo "The Title of this PR is ${{ github.event.pull_request.title }}"
+    - uses: actions-ecosystem/action-regex-match@v2
+      id: regex-match
+      with:
+        text: ${{ github.event.pull_request.title }}
+        regex: '^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test){1}(\([\w\-\.]+\))?(!)?: ([\w ])+([\s\S]*)'
+    - uses: mshick/add-pr-comment@v2
+      name: pr-title-failure
+      if: steps.regex-match.outputs.match == ''
+      with:
+        message-id: pr-title-message
+        message: |
+          💩 Revisa el título de la PR. Recuerda que debe seguir el formato convencional https://www.conventionalcommits.org/en/v1.0.0/
+          ![collina](https://storage.googleapis.com/collinas/collina-title-pr.png)
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        refresh-message-position: true
+    - uses: mshick/add-pr-comment@v2
+      name: pr-title-success
+      if: steps.regex-match.outputs.match != ''
+      with:
+        message-id: pr-title-message
+        message: |
+          🎉 El título de la PR es correcto. ¡Gracias por seguir el formato convencional!
+          ![collina](https://storage.googleapis.com/collinas/collina-title-pr-ok.png)
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        refresh-message-position: true
+        update-only: true
+    - name: Check on failures
+      if: steps.regex-match.outputs.match == ''
+      run: echo "PR title is invalid. Follow conventional commit https://www.conventionalcommits.org/en/v1.0.0/" && exit 1
