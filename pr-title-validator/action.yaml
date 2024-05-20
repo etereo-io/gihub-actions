@@ -2,10 +2,16 @@ name: PR Title Validator
 author: BillinTeam
 description: |-
   Action check if PR title follows conventional commits format.
+inputs:
+  repo-token:
+    description: 'github token to be able to post comments'
+    required: true
+    default: ''
 runs:
   using: "composite"
   steps:
     - name : Print Title of PR
+      shell: bash
       run: echo "The Title of this PR is ${{ github.event.pull_request.title }}"
     - uses: actions-ecosystem/action-regex-match@v2
       id: regex-match
@@ -20,7 +26,7 @@ runs:
         message: |
           💩 Revisa el título de la PR. Recuerda que debe seguir el formato convencional https://www.conventionalcommits.org/en/v1.0.0/
           ![collina](https://storage.googleapis.com/collinas/collina-title-pr.png)
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        repo-token: ${{ inputs.repo-token }}
         refresh-message-position: true
     - uses: mshick/add-pr-comment@v2
       name: pr-title-success
@@ -30,9 +36,10 @@ runs:
         message: |
           🎉 El título de la PR es correcto. ¡Gracias por seguir el formato convencional!
           ![collina](https://storage.googleapis.com/collinas/collina-title-pr-ok.png)
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        repo-token: ${{ inputs.repo-token }}
         refresh-message-position: true
         update-only: true
     - name: Check on failures
+      shell: bash
       if: steps.regex-match.outputs.match == ''
       run: echo "PR title is invalid. Follow conventional commit https://www.conventionalcommits.org/en/v1.0.0/" && exit 1
