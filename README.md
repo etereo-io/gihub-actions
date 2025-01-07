@@ -1,5 +1,9 @@
 # github-actions
 
+## TAG 2.18
+
+use helm cm-push
+
 ## TAG 2.14
 
 use node 20.x
