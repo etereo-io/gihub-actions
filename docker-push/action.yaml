@@ -34,7 +34,7 @@ runs:
       shell: bash
       id: build-docker
       run: |-
-        gcloud auth configure-docker
+        gcloud auth configure-docker europe-west1-docker.pkg.dev
         docker build . -f ${{ inputs.dockerfilePath }} -t ${{ inputs.dockerImageUrl }}
         IMAGE_URL=${{ inputs.dockerImageUrl }}:${{ inputs.dockerImageTag }}
         docker tag ${{ inputs.dockerImageUrl }} $IMAGE_URL

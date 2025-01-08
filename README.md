@@ -1,5 +1,9 @@
 # github-actions
 
+## TAG 2.19
+
+docker push google artifact registry login
+
 ## TAG 2.18
 
 use helm cm-push
