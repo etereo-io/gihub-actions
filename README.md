@@ -1,6 +1,10 @@
 # github-actions
 
-## TAG 2.19
+## TAG 2.21
+
+gcp-auth action gcpZone not required
+
+## TAG 2.20
 
 Adds gcp auth action
 

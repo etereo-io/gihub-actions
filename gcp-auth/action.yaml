@@ -3,10 +3,6 @@ author: BillinTeam
 description: |-
   Authenticate against Google Cloud Platform and Google Kubernetes Engine
 inputs:
-  gcpZone:
-    description: "Google Cloud Platform zone"
-    required: true
-    default: ""
   gcpProjectId:
     description: "Google Cloud Platform Project id"
     required: true
@@ -19,6 +15,10 @@ inputs:
     description: "Get credentials to authenticate with GKE cluster"
     required: false
     default: "false"
+  gcpZone:
+    description: "Google Cloud Platform zone to get the GKE cluster credentials"
+    required: false
+    default: ""
 runs:
   using: "composite"
   steps:
