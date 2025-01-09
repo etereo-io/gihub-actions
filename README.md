@@ -1,5 +1,9 @@
 # github-actions
 
+## TAG 2.22
+
+fix gcp-auth action yaml format
+
 ## TAG 2.21
 
 gcp-auth action gcpZone not required

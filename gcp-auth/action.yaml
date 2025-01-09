@@ -25,17 +25,17 @@ runs:
     - id: 'auth'
       name: Auth Google
       uses: google-github-actions/auth@v1
-        with:
-          project_id: ${{ inputs.gcpProjectId }}
-          credentials_json: ${{ inputs.gcpServiceAccountKey }}
-          token_format: 'access_token'
+      with:
+        project_id: ${{ inputs.gcpProjectId }}
+        credentials_json: ${{ inputs.gcpServiceAccountKey }}
+        token_format: 'access_token'
     - uses: google-github-actions/setup-gcloud@v2
-        with:
-          project_id: ${{ inputs.gcpProjectId }}
-                install_components: 'gke-gcloud-auth-plugin'
+      with:
+        project_id: ${{ inputs.gcpProjectId }}
+        install_components: 'gke-gcloud-auth-plugin'
     - id: 'get-credentials'
       if: ${{ inputs.getGkeCredentials == 'true' }}
       uses: google-github-actions/get-gke-credentials@v2
-        with:
-          cluster_name: ${{ inputs.gcpProjectId }}
-          location: ${{ inputs.gcpZone }}
+      with:
+        cluster_name: ${{ inputs.gcpProjectId }}
+        location: ${{ inputs.gcpZone }}
