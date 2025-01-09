@@ -2,6 +2,10 @@
 
 ## TAG 2.19
 
+Adds gcp auth action
+
+## TAG 2.19
+
 docker push google artifact registry login
 
 ## TAG 2.18

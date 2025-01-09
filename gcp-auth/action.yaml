@@ -1,0 +1,41 @@
+name: GCP and GKE Auth
+author: BillinTeam
+description: |-
+  Authenticate against Google Cloud Platform and Google Kubernetes Engine
+inputs:
+  gcpZone:
+    description: "Google Cloud Platform zone"
+    required: true
+    default: ""
+  gcpProjectId:
+    description: "Google Cloud Platform Project id"
+    required: true
+    default: ""
+  gcpServiceAccountKey:
+    description: "Gcp service account key to use for authentication against gcp"
+    required: true
+    default: ""
+  getGkeCredentials:
+    description: "Get credentials to authenticate with GKE cluster"
+    required: false
+    default: "false"
+runs:
+  using: "composite"
+  steps:
+    - id: 'auth'
+      name: Auth Google
+      uses: google-github-actions/auth@v1
+        with:
+          project_id: ${{ inputs.gcpProjectId }}
+          credentials_json: ${{ inputs.gcpServiceAccountKey }}
+          token_format: 'access_token'
+    - uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ inputs.gcpProjectId }}
+                install_components: 'gke-gcloud-auth-plugin'
+    - id: 'get-credentials'
+      if: ${{ inputs.getGkeCredentials == 'true' }}
+      uses: google-github-actions/get-gke-credentials@v2
+        with:
+          cluster_name: ${{ inputs.gcpProjectId }}
+          location: ${{ inputs.gcpZone }}
