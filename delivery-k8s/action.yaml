@@ -75,6 +75,10 @@ inputs:
     description: 'Flag that indicates the deployment will be from a Pull Request'
     required: false
     default: ''
+  extraHelmEnvVars:
+    description: "Extra helm environment variables to be set in the helmfile sync command"
+    required: false
+    default: ""
 outputs:
   namespace: # id of the output
     description: "The kubernetes namespace where the application is deployed to"
@@ -190,4 +194,9 @@ runs:
           export ${{inputs.dockerImageTagEnvName}}=${{inputs.dockerImageTagEnv}}
         fi
 
-        ./helmfile --file ${{ inputs.baseDeployDir }}/$ENVIRONMENT/${{ inputs.helmfileName }} sync $HELM_EXTRA_ARGS
+        EXTRA_HELM_ENV_VARS=""
+        for env_var in ${{ inputs.envVars }}; do
+          EXTRA_HELM_ENV_VARS+="--set $env_var "
+        done
+
+        ./helmfile --file ${{ inputs.baseDeployDir }}/$ENVIRONMENT/${{ inputs.helmfileName }} sync $HELM_EXTRA_ARGS $EXTRA_HELM_ENV_VARS
