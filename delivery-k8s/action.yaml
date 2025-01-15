@@ -195,7 +195,7 @@ runs:
         fi
 
         EXTRA_HELM_ENV_VARS=""
-        for env_var in ${{ inputs.envVars }}; do
+        for env_var in ${{ inputs.extraHelmEnvVars }}; do
           EXTRA_HELM_ENV_VARS+="--set $env_var "
         done
 
