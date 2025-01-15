@@ -196,7 +196,7 @@ runs:
 
         EXTRA_HELM_ENV_VARS=""
         for env_var in ${{ inputs.extraHelmEnvVars }}; do
-          EXTRA_HELM_ENV_VARS+="--set $env_var "
+          EXTRA_HELM_ENV_VARS+="--set base.deployment.environment.extraVarsObject.$env_var "
         done
 
         echo "EXTRA VARS:  $EXTRA_HELM_ENV_VARS"
